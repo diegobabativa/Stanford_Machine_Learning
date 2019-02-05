@@ -24,7 +24,7 @@ J = 0;
 %square_errors = (predictions - y).^2
 %J = 1/(2*m) * sum(square_errors)
 
-%third Approach (The best solution)
+%third Approach (The best solution (Vectorized version)) 
 J = 1/(2*m)*(X*theta - y)' * (X*theta-y)
 
 % =========================================================================
