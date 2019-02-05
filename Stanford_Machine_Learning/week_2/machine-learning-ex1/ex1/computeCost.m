@@ -13,10 +13,10 @@ J = 0;
 % Instructions: Compute the cost of a particular choice of theta
 %               You should set J to the cost.
 
-
-
-
-
+for i = 1:m
+   J = J + 1/(2*m) * (((theta(1:1) + theta(2:2))*X(i,1)) - y(i,1))^2 
+endfor
+J = sprintf("%.2f", J)
 % =========================================================================
 
 end
