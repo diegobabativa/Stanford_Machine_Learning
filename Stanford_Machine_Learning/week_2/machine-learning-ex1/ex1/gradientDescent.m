@@ -17,11 +17,21 @@ for iter = 1:num_iters
     %       of the cost function (computeCost) and gradient here.
     %
 
-
-
-
-
-
+    % First approaches {Doesn´t Works :( }
+    %theta - alpha * (1/m) * sum((X*theta)-y)*X
+    %theta = theta - alpha * (1/m) * sum(X*theta(1:1)-y)
+    %theta(2:2) = theta(2:2) - alpha * (1/m) * sum(X*theta(2:2)-y)*X
+    %disp("theta0: "), disp(theta(1:1))
+    %disp("theta1: "), disp(theta(2:2))
+    
+    %The second approach (Matrix Notation in Reources Course)  {It Works !}:
+    
+    %predictions =  X * theta;
+    %updates = X' * (predictions - y);
+    %theta = theta - alpha * (1/m) * updates;
+    
+    %The best approach - Vectorized of the Gradient Descent {It Works !}:
+    theta = theta - (alpha/m) * X' * (X*theta-y)
 
     % ============================================================
 
