@@ -17,7 +17,8 @@ for iter = 1:num_iters
     %       of the cost function (computeCostMulti) and gradient here.
     %
 
-
+  %The best approach - Vectorized of the Gradient Descent {It Works !}:
+    theta = theta - (alpha/m) * X' * (X*theta-y)
 
 
 

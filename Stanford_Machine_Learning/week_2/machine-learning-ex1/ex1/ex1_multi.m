@@ -92,8 +92,20 @@ theta = zeros(3, 1);
 % Plot the convergence graph
 figure;
 plot(1:numel(J_history), J_history, '-b', 'LineWidth', 2);
+
+%%dbabativa: This is my way to plotting data (I tried it)
+hold on;
+%%Setting the alpha value to plot other gradient descent
+[theta, J_history_2] = gradientDescentMulti(X, y, theta, 0.02, num_iters);
+[theta, J_history_3] = gradientDescentMulti(X, y, theta, 0.05, num_iters);
+
+plot(1:numel(J_history_2), J_history_2, '-r', 'LineWidth', 2);
+hold on;
+plot(1:numel(J_history_3), J_history_3, '-k', 'LineWidth', 2);
+
 xlabel('Number of iterations');
 ylabel('Cost J');
+
 
 % Display gradient descent's result
 fprintf('Theta computed from gradient descent: \n');
