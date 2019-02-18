@@ -13,12 +13,21 @@ figure; hold on;
 %
 
 
+%Find indices of Positive and Negative examples
+pos = find(y==1); neg = find(y==0);
 
+%plot the examples:
 
+display("Printing positive valuess ...");
+display(pos)
+display("Printing negative valuess ...");
+display(neg)
 
-
-
-
+% Plot Examples
+plot(X(pos, 1), X(pos, 2), 'k+','LineWidth', 2, ...
+'MarkerSize', 7);
+plot(X(neg, 1), X(neg, 2), 'ko', 'MarkerFaceColor', 'y', ...
+'MarkerSize', 15);
 
 % =========================================================================
 
