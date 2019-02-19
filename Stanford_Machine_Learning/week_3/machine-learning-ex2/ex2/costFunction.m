@@ -28,7 +28,7 @@ J= (1/m) .* sum(prediction);
 grad = (1/m) .* (X' *(h - y));
 
 %Note: 
-In the PDF file, the formule is as follows: (1/m) .* sum(h-y) * X
+%In the PDF file, the formule is as follows: (1/m) .* sum(h-y) * X
 
 % =============================================================
 
