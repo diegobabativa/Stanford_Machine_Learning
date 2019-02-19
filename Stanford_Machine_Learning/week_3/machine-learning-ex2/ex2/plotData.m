@@ -18,10 +18,10 @@ pos = find(y==1); neg = find(y==0);
 
 %plot the examples:
 
-display("Printing positive valuess ...");
-display(pos)
-display("Printing negative valuess ...");
-display(neg)
+%display("Printing positive valuess ...");
+%display(pos)
+%display("Printing negative valuess ...");
+%display(neg)
 
 % Plot Examples
 plot(X(pos, 1), X(pos, 2), 'k+','LineWidth', 2, ...

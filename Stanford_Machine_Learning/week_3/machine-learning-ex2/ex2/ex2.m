@@ -45,6 +45,11 @@ ylabel('Exam 2 score')
 legend('Admitted', 'Not admitted')
 hold off;
 
+%dbabativa stop
+disp(mean(X(:,1)));
+disp(mean(X(:,2)));
+disp(mean(y))
+
 fprintf('\nProgram paused. Press enter to continue.\n');
 pause;
 
