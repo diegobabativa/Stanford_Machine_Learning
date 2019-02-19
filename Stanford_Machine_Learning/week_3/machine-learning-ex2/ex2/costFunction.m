@@ -20,20 +20,15 @@ grad = zeros(size(theta));
 % Note: grad should have the same dimensions as theta
 %
 
-
 #First approach, with partial Derivative 
 
 h = sigmoid(X * theta);
 prediction = -y .* log(h)-(1.-y).*log(1-h);
 J= (1/m) .* sum(prediction);
-
-
 grad = (1/m) .* (X' *(h - y));
 
-#Second approach,  with vectorized version
-
-
-
+%Note: 
+In the PDF file, the formule is as follows: (1/m) .* sum(h-y) * X
 
 % =============================================================
 
