@@ -23,16 +23,12 @@ grad = zeros(size(theta));
 
 #First approach, with partial Derivative 
 
+h = sigmoid(X * theta);
+prediction = -y .* log(h)-(1.-y).*log(1-h);
+J= (1/m) .* sum(prediction);
 
-grad = sigmoid(X);
-display("prin SIGMoid");
-display(grad);
-#prediction = -y .* log(sigmoid_result)-(1.-y).*log(1-sigmoid_result);
-#suma = sum(prediction);
-#J = - 1/m .* suma;
 
-#grad = 1/m .* sum(sigmoid_result-y).*X;
-
+grad = (1/m) .* (X' *(h - y));
 
 #Second approach,  with vectorized version
 
