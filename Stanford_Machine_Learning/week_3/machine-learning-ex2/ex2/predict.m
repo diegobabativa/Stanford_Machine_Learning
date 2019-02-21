@@ -16,12 +16,30 @@ p = zeros(m, 1);
 %
 
 
+%My first approach: It works !
+
+#{
+for index=1:m
+ z =  theta(1)+ (theta(2)* X(index,2))+(theta(3)*X(index,3))
+if sigmoid(z) >= 0.5
+  p(index) = 1;
+else
+  p(index)  = 0;
+endif
+endfor
+#}
+
+#{
+% Second approach (Advanced):
+f=@(n) round(n);
+s = sigmoid(X * theta);
+p = f(s);
+#}
 
 
-
-
+%%Third Approach (My best solution)
+ p = round (sigmoid(X * theta ))
 
 % =========================================================================
-
 
 end
