@@ -19,13 +19,15 @@ grad = zeros(size(theta));
 
 #First approach, with partial Derivative 
 
+
 h = sigmoid(X * theta);
 prediction = -y .* log(h)-(1.-y).*log(1-h);
-regularized_factor = (lambda/(2*m))
+regularization_factor = (lambda/(2*m));
+theta(1,:)=0;
 
-J= (1/m) .* sum(prediction) .+ regularized_factor;
+J= (1/m) .* sum(prediction) .+ regularization_factor * sum(theta.^2);
 
-grad = (1/m) .* (X' *(h - y)) .+ (lambda/m);
+grad = (1/m) .* (X' *(h - y)) .+ (lambda/m) *theta;
 
 
 % =============================================================
