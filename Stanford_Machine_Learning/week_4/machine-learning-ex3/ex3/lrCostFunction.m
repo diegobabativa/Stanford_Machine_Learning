@@ -37,10 +37,16 @@ grad = zeros(size(theta));
 %
 
 
+#First approach (My past exercise (costFunctionReg))
 
+h = sigmoid(X * theta);
+prediction = -y .* log(h)-(1.-y).*log(1-h);
+regularization_factor = (lambda/(2*m));
+theta(1,:)=0;
 
+J = (1/m) .* sum(prediction) .+ (regularization_factor) * sum(theta.^2);
 
-
+grad = (1/m) .* (X' *(h-y)) .+ (lambda/m) *theta;
 
 
 

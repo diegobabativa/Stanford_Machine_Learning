@@ -11,6 +11,9 @@ g = zeros(size(z));
 
 g = 1./(1+e.^(-z)) 
 
+#The next approach is the sigmoid of week_4
+#g = 1.0 ./ (1.0 + exp(-z))
+
 % =============================================================
 
 end

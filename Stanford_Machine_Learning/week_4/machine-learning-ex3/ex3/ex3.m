@@ -5,7 +5,7 @@
 %
 %  This file contains code that helps you get started on the
 %  linear exercise. You will need to complete the following functions
-%  in this exericse:
+%  in this exercise:
 %
 %     lrCostFunction.m (logistic regression cost function)
 %     oneVsAll.m
@@ -39,7 +39,7 @@ m = size(X, 1);
 rand_indices = randperm(m);
 sel = X(rand_indices(1:100), :);
 
-displayData(sel);
+%displayData(sel);
 
 fprintf('Program paused. Press enter to continue.\n');
 pause;
