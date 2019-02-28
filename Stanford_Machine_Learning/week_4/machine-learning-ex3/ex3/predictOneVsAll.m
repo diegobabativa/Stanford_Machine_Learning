@@ -1,4 +1,4 @@
-function p = predictOneVsAll(all_theta, X)
+function p = predictOneVsAll(all_theta, X, Y)
 %PREDICT Predict the label for a trained one-vs-all classifier. The labels 
 %are in the range 1..K, where K = size(all_theta, 1). 
 %  p = PREDICTONEVSALL(all_theta, X) will return a vector of predictions
@@ -22,6 +22,7 @@ X = [ones(m, 1) X];
 %               your learned logistic regression parameters (one-vs-all).
 %               You should set p to a vector of predictions (from 1 to
 %               num_labels).
+
 %
 % Hint: This code can be done all vectorized using the max function.
 %       In particular, the max function can also return the index of the 
@@ -30,24 +31,20 @@ X = [ones(m, 1) X];
 %       for each row.
 %       
 
+prediction = zeros(10,1);
+
+
 for index_x=1:m
   
-for label=1:num_labels
-prediction(label) = sigmoid(X(1)*all_theta(label));
-endfor
-
+prediction = sigmoid(all_theta * X(index_x,:)')';
 [value index] =   max(prediction, [], 2);
-
-if index==10
-  index=0;
-endif
-
 p(index_x) = index;
-
+index
 endfor
 
-
-
+%-------------------------
+%all_preds = all_theta * X';
+%all_preds
 
 % =========================================================================
 
