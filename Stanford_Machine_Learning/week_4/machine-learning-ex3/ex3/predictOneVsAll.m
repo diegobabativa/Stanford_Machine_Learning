@@ -30,8 +30,21 @@ X = [ones(m, 1) X];
 %       for each row.
 %       
 
+for index_x=1:m
+  
+for label=1:num_labels
+prediction(label) = sigmoid(X(1)*all_theta(label));
+endfor
 
+[value index] =   max(prediction, [], 2);
 
+if index==10
+  index=0;
+endif
+
+p(index_x) = index;
+
+endfor
 
 
 
