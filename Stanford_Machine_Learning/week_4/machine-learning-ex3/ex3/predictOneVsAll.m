@@ -35,7 +35,9 @@ prediction = zeros(10,1);
 
 
 for index_x=1:m
-  
+
+pre_prediction = (all_theta * X(index_x,:)')'
+
 prediction = sigmoid(all_theta * X(index_x,:)')';
 [value index] =   max(prediction, [], 2);
 p(index_x) = index;
