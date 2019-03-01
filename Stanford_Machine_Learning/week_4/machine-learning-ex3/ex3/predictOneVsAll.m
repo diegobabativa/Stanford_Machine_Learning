@@ -31,8 +31,8 @@ X = [ones(m, 1) X];
 %       for each row.
 %       
 
-prediction = zeros(10,1);
 
+prediction = zeros(10,1);
 
 for index_x=1:m
 
@@ -45,8 +45,7 @@ index
 endfor
 
 %-------------------------
-%all_preds = all_theta * X';
-%all_preds
+
 
 % =========================================================================
 
