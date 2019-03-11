@@ -62,13 +62,9 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+%1. We have to compute the cost function
 
-
-
-
-
-
-
+first = (1/m) ...
 
 
 
