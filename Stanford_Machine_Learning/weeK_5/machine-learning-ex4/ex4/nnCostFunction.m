@@ -62,19 +62,25 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
-%1. We have to compute the cost function
 
-first = (1/m) ...
+%1. Compute the hypothesis h?(x)
 
+a1 = [ones(m,1) X]
+z2 = a1 * Theta1'
+a2 = [ones(m,1) sigmoid(z2)]
+z3 = a2 * Theta2'
+a3 = sigmoid(z3)
 
+h = a3
 
+%2. Convert the y label vectorto binary vector
+% Coming soon
 
+%3. We have to compute the cost function
 
-
-
-
-
-
+first = (1/m)*sum(m)*sum(num_labels)
+prediction = (-y.*num_labels).*log((h).*num_labels)-(1-y.*num_labels).*log(1-((h).*num_labels))
+J= first * prediction
 
 % -------------------------------------------------------------
 
