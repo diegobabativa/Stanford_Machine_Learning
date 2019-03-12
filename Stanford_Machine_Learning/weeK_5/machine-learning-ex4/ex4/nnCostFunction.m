@@ -73,14 +73,13 @@ a3 = sigmoid(z3)
 
 h = a3
 
-%2. Convert the y label vectorto binary vector
-% Coming soon
+%2. Convert the y label vector to binary vector
+y_matrix = eye(num_labels)(y,:) 
 
 %3. We have to compute the cost function
 
-first = (1/m)*sum(m)*sum(num_labels)
-prediction = (-y.*num_labels).*log((h).*num_labels)-(1-y.*num_labels).*log(1-((h).*num_labels))
-J= first * prediction
+prediction = (-y_matrix).*log((h))-(1.-y_matrix).*log(1-((h)))
+J = (1/m)*sum(sum(prediction))
 
 % -------------------------------------------------------------
 
