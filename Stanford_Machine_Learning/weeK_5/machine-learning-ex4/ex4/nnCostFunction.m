@@ -81,6 +81,16 @@ y_matrix = eye(num_labels)(y,:)
 prediction = (-y_matrix).*log((h))-(1.-y_matrix).*log(1-((h)))
 J = (1/m)*sum(sum(prediction))
 
+
+%Exlude the Theta first column (Bias unit)
+Theta1 = Theta1(:,2:end)
+Theta2 = Theta2(:,2:end)
+
+% Cost Regularization
+regularization_term = 1/(2*m)* sum(sum(Theta1.^2)+sum(sum(Theta2.^2)))
+
+J = J + regularization_term
+
 % -------------------------------------------------------------
 
 % =========================================================================
