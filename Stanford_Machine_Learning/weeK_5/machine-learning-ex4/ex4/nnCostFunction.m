@@ -79,17 +79,31 @@ y_matrix = eye(num_labels)(y,:)
 %3. We have to compute the cost function
 
 prediction = (-y_matrix).*log((h))-(1.-y_matrix).*log(1-((h)))
-J = (1/m)*sum(sum(prediction))
+J = (1/m)* sum(sum(prediction))
 
 
 %Exlude the Theta first column (Bias unit)
-Theta1 = Theta1(:,2:end)
-Theta2 = Theta2(:,2:end)
+t1 = Theta1(:,2:end)
+t2 = Theta2(:,2:end)
 
 % Cost Regularization
-regularization_term = 1/(2*m)* sum(sum(Theta1.^2)+sum(sum(Theta2.^2)))
-
+regularization_term = (lambda/(2*m))* (sum(sum(t1.^2))+ sum(sum(t2.^2)))
 J = J + regularization_term
+
+%Compute the BackPropagation algorithm:
+for t=1:m
+  
+a_1 = [1; X(t,:)]
+z_2 = a_1 * Theta1'
+a_2 = [1 sigmoid(z2)]
+z_3 = a_2 * Theta2'
+a_3 = sigmoid(z_3)
+
+h = a_3
+  
+  
+endfor
+
 
 % -------------------------------------------------------------
 
