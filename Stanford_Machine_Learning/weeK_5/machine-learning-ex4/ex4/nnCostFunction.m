@@ -76,7 +76,6 @@ h = a3
 
 %2. Convert the y label vector to binary vector
 y_matrix = eye(num_labels)(y,:) 
-y_matrix = y_matrix'
 
 %3. We have to compute the cost function
 
@@ -92,29 +91,33 @@ t2 = Theta2(:,2:end)
 regularization_term = (lambda/(2*m))* (sum(sum(t1.^2))+ sum(sum(t2.^2)))
 J = J + regularization_term
 
+
 %My Approach
 %Compute the BackPropagation algorithm:
 
+igual_gihub = y_matrix'
+a1 = [ones(m,1) X]
+
 for t=1:m
   
-a1 = a1(t,:) %X already have bias
-z2 = Theta1 * a1';
-a2 = sigmoid(z2);
-a2 = [1; a2];
+a_1 = a1(t,:) %X already have bias
+z_2 = Theta1 * a_1';
+a_2 = sigmoid(z_2);
+a_2 = [1; a_2];
 
-z3 = Theta2 * a2
-a3 = sigmoid(z3) %final activation layer  
+z_3 = Theta2 * a_2
+a_3 = sigmoid(z_3) %final activation layer  
 
-z2=[1; z2]; % bias
+z2=[1; z_2]; % bias //Here is the error
 
-delta_3 = (a3 - y_matrix(:,t)) %Y_matriz identity
-delta_2 = (Theta2' * delta_3) .* sigmoidGradient(z2)
+delta_3 = (a_3 - igual_gihub(:,t)) %Y_matriz identity
+delta_2 = (Theta2' * delta_3) .* sigmoidGradient(z_2)
 
 %Remove S^2 of the unity Zero
 delta_2 = delta_2(2:end)
 
-Theta2_grad = Theta2_grad + delta_3 * a2'
-Theta1_grad = Theta1_grad + delta_2 * a1
+Theta2_grad = Theta2_grad + delta_3 * a_2'
+Theta1_grad = Theta1_grad + delta_2 * a_1
 
 endfor
 
@@ -141,7 +144,7 @@ for i=1:m,
 end
 
 % follow the form
-J = (1/m) * sum ( sum (  (-yk) .* log(h_theta)  -  (1-yk) .* log(1-h_theta) ));
+J = (1/m) * sum ( sum (  (-igual_gihub) .* log(h_theta)  -  (1-igual_gihub) .* log(1-h_theta) ));
 
 
 
