@@ -62,9 +62,10 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
-%My approach
+%My first approach
 %----------------------------------------------------
 %1. Compute the hypothesis h?(x)
+%{
 
 a1 = [ones(m,1) X]
 z2 = a1 * Theta1'
@@ -95,6 +96,7 @@ J = J + regularization_term
 %My Approach
 %Compute the BackPropagation algorithm:
 
+
 igual_gihub = y_matrix'
 a1 = [ones(m,1) X]
 
@@ -108,7 +110,7 @@ a_2 = [1; a_2];
 z_3 = Theta2 * a_2
 a_3 = sigmoid(z_3) %final activation layer  
 
-z2=[1; z_2]; % bias //Here is the error
+z_2=[1; z_2]; % bias
 
 delta_3 = (a_3 - igual_gihub(:,t)) %Y_matriz identity
 delta_2 = (Theta2' * delta_3) .* sigmoidGradient(z_2)
@@ -120,12 +122,12 @@ Theta2_grad = Theta2_grad + delta_3 * a_2'
 Theta1_grad = Theta1_grad + delta_2 * a_1
 
 endfor
+%}
 
+%%----------------Other Approach -----------------------
 
-%%----------------Other Approach -.----------------------
-%{
 y_matrix = eye(num_labels)(y,:);
-igual_gihub = y_matrix'
+y_matrix_trans = y_matrix'
 
 X = [ones(m,1) X];
 
@@ -137,19 +139,9 @@ a2 = [ones(m,1) a2'];
 
 h_theta = sigmoid(Theta2 * a2'); % h_theta equals z3
 
-% y(k) - the great trick - we need to recode the labels as vectors containing only values 0 or 1 (page 5 of ex4.pdf)
-yk = zeros(num_labels, m); 
-for i=1:m,
-  yk(y(i),i)=1;
-end
-
 % follow the form
-J = (1/m) * sum ( sum (  (-igual_gihub) .* log(h_theta)  -  (1-igual_gihub) .* log(1-h_theta) ));
+J = (1/m) * sum ( sum (  (-y_matrix_trans) .* log(h_theta)-(1-y_matrix_trans) .* log(1-h_theta)));
 
-
-
-% Note that you should not be regularizing the terms that correspond to the bias. 
-% For the matrices Theta1 and Theta2, this corresponds to the first column of each matrix.
 t1 = Theta1(:,2:size(Theta1,2));
 t2 = Theta2(:,2:size(Theta2,2));
 
@@ -163,37 +155,37 @@ J = J + Reg;
 % Backprop
 for t=1:m,
 
-	% dummie pass-by-pass
-	% forward propag
+	a_1 = X(t,:); 
+	z_2 = Theta1 * a_1';
 
-	a1 = X(t,:); % X already have bias
-	z2 = Theta1 * a1';
+	a_2 = sigmoid(z_2);
+	a_2 = [1 ; a_2]; % add bias
 
-	a2 = sigmoid(z2);
-	a2 = [1 ; a2]; % add bias
+	z_3 = Theta2 * a_2;
 
-	z3 = Theta2 * a2;
+	a_3 = sigmoid(z_3); % last activation layer a3
 
-	a3 = sigmoid(z3); % final activation layer a3 == h(theta)
+	z_2=[1; z_2];
 
-
-	% back propag (god bless me)	
-
-	z2=[1; z2]; % bias
-
-	delta_3 = a3 - igual_gihub(:,t); % y(k) trick - getting columns of t element
-	delta_2 = (Theta2' * delta_3) .* sigmoidGradient(z2);
+	delta_3 = a_3 - y_matrix_trans(:,t);
+	delta_2 = (Theta2' * delta_3) .* sigmoidGradient(z_2);
 
 	% skipping sigma2(0) 
 	delta_2 = delta_2(2:end); 
 
-	Theta2_grad = Theta2_grad + delta_3 * a2';
-	Theta1_grad = Theta1_grad + delta_2 * a1; % I don't know why a1 doesn't need to be transpost (brute force try)
+	Theta2_grad = Theta2_grad + delta_3 * a_2';
+	Theta1_grad = Theta1_grad + delta_2 * a_1; 
 
 end;
-%}
 
 % -------------------------------------------------------------
+%Regularization the Neural Network
+
+Theta1_grad(:,1) = Theta1_grad(:,1) ./ m;
+Theta1_grad(:, 2:end) = Theta1_grad(:,2:end) ./ m + ((lambda / m) * Theta1(:,2:end));
+
+Theta2_grad(:,1) = Theta2_grad(:,1) ./ m;
+Theta2_grad(:, 2:end) = Theta2_grad(:,2:end) ./ m + ((lambda / m) * Theta2(:,2:end));
 
 % =========================================================================
 
