@@ -19,15 +19,20 @@ grad = zeros(size(theta));
 %               You should set J to the cost and grad to the gradient.
 %
 
+# The best way is separate the formule in some variables:
 
+h = X * theta
+h_error = h-y
+first = (1/(2*m)) * sum(h_error .^2) 
 
+twb = theta(2:end)
+sumCuadradoTheta = sum(twb .^ 2 )
+second = (lambda/(2*m)) * sumCuadradoTheta
 
+J = first + second;
 
-
-
-
-
-
+grad =  (1/m) * X' * h_error
+grad(2:end) += (lambda / m ) * twb
 
 
 % =========================================================================
